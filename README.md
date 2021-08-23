@@ -3,7 +3,10 @@
 The API is written using Flask framework with Python 3.8 and MySQL. The starting point of the API is the index.py class which is written in Flask. It exposes 3 endpoints to the user to get data, which are: “/fib/{number}”, “/health” & “/”. The index.py script imports DB_Handler and Fibonacci_Sum classes from DB_Handler.py and Fibonacci_Sum.py scripts respectively which are in the same folder as index.py. The DB_Handler class holds the properties to connect to the database and handles the database functions such as getting the database connection and inserting the request logs to the database table. The Fibonacci_Sum class does all the processing to find all the possible combinations of the smaller Fibonacci numbers that add up to that number. It first finds all the Fibonacci numbers that are smaller than the given number and then using 2 lists recursively calculates all the possible combinations and returns a list of all these combinations.
 All the endpoints return data in JSON, if there are errors like there is no database connection or the insert fails or any HTTP error, the error messages are returned as JSON and the API itself doesn’t fail. The error codes associated with the messages are self-assumed.
 The API is containerized, and a separate MySQL container is used. A docker-compose file is written to run the whole service.
+
 To run the docker-compose, go the fibonacci-flask folder which contains the docker-compose.yaml file and run docker-compose up command. You can use the API with the IP of the host running the docker-compose on port 5000.
+
+
 Brief explanation of endpoints:
 •	/
 If the user accesses only the IP of the Flask server, the decorator with (/) handler is used and the function landing gets called which returns the message in JSON to the user to use  /fib/{number} & /health endpoints to acquire data.
