@@ -6,8 +6,12 @@ The API is containerized, and a separate MySQL container is used. A docker-compo
 
 To run the docker-compose, go the fibonacci-flask folder which contains the docker-compose.yaml file and run docker-compose up command. You can use the API with the IP of the host running the docker-compose on port 5000.
 
+When you open the fibonacci-flask folder you find 2 folders (code,db) and a docker-compose.yaml file. 
+The “code” folder contains another folder “app” which contains all the python scripts, a Dockerfile which creates the image for our flask server and is required by the docker-compose.yaml file, and a requirements.txt file that is used by the Dockerfile to install the required python modules using pip.
+The “db” folder contains an initialize.sql file that is required by the docker-compose.yaml file to create the database and tables when the MySQL container is run for the first time.
 
 Brief explanation of endpoints:
+
 •	/
 If the user accesses only the IP of the Flask server, the decorator with (/) handler is used and the function landing gets called which returns the message in JSON to the user to use  /fib/{number} & /health endpoints to acquire data.
 
@@ -15,7 +19,6 @@ If the user accesses only the IP of the Flask server, the decorator with (/) han
 This endpoint returns data when a GET call is made to it with a number to calculate the combinations for. As soon as the call is made to it, a timestamp is saved which is used in logging the requests made to it. Then, the combinations are calculated and after that a call is made to the database to log the metadata about the request. The metadata saved consists of the timestamp when the request is received, the IP of the requestor, a status code and path of the request. On success, the combinations calculated are returned to the user and in case of a failure from the database side the error message is returned.
 
 •	/health
+
 This endpoint returns the condition of the API. If the database is available it returns a unique code and shows the message that API is working fine, otherwise the error message with an unique error code is returned.
-When you open the fibonacci-flask folder you find 2 folders (code,db) and a docker-compose.yaml file. 
-The “code” folder contains another folder “app” which contains all the python scripts, a Dockerfile which creates the image for our flask server and is required by the docker-compose.yaml file, and a requirements.txt file that is used by the Dockerfile to install the required python modules using pip.
-The “db” folder contains an initialize.sql file that is required by the docker-compose.yaml file to create the database and tables when the MySQL container is run for the first time.
+
